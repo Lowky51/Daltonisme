@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Changeur de Couleur</title>
+    <style>
+        #texte {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Changez la couleur de fond</h1>
+
+    <a href="htmlt.html">PAGE POUR FAIRE DES TEST</a>
+    <br><br><br>
+
+    <br>
+    <p>Palette 1</p>
+    <input class="test" type="color" value="#ff0000" id="colorWell" />
+
+    <p>Palette 2</p>
+    <input class="test" type="color" value="#ff0000" id="colorWell_2" />
+
+    <p>Palette 3</p>
+    <input class="test" type="color" value="#ff0000" id="colorWell_3" />
+
+    <p>Palette 4</p>
+    <input class="test" type="color" value="#ff0000" id="colorWell_4" />
+
+    <p>Palette 5</p>
+    <input class="test" type="color" value="#ff0000" id="colorWell_5" />
+
+
+
+    <div class="slidecontainer">
+        <input type="range" min="1" max="10" value="1" class="slider" id="myRange">
+        <div id="test"></div>
+    </div>
+
+    <button onclick="createMultipleDivs()" >Créer une palette de couleur</button>
+    <br><br><br>
+
+    <div id="container" class="" >
+        <h2 class="normal">NORMAL 1 </h2>
+        
+
+        <div id="CouleurOrigine" class="box"></div>
+
+        <h2 class="normal" >PROTANOPIE </h2>
+
+        <div id="protanopeCouleur" class="box"></div>
+
+        <h2>DEUTERANOPIE</h2>
+
+        <div id="deuteranopeCouleur" class="box"></div>
+
+        <h2>TRITANOPIE </h2>
+
+        <div id="tritanopeCouleur" class="box"></div>
+
+        
+    </div>
+
+    <script src="dalto_5.js" ></script>
+    <script src="dalto_4.js" ></script>
+    <script src="dalto_3.js" ></script>
+    <script src="dalto_2.js"></script>
+    <script src="dalto.js"></script>
+</body>
+
+</html>
