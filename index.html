@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Changeur de Couleur</title>
+    <style>
+        #texte {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <p>Palette 1</p>
+    <input class="test" type="color" value="#ff0000" id="colorWell" />
+    <input type="text" name="" id="couleurInput">
+    
+
+    <br><br><br><br>
+
+    <div class="slidecontainer">
+        <div id="test"></div>
+        <input type="range" min="0" max="1" value="0" step="0.01" class="slider" id="myRange">
+        
+    </div>
+
+    <button class="button_create" onclick="createMultipleDivs()" >Créer une palette de couleur</button>
+    <br><br><br>
+
+    <div id="container" class="" >
+
+        <div id="CouleurOrigine" class="box_1">
+            <h4 class="normal">NORMAL 1 </h4>
+        </div>
+
+        
+
+        <div id="protanopeCouleur" class="box_2">
+            <h4 class="normal" >PROTANOPIE </h4>
+        </div>
+
+        
+
+        <div id="deuteranopeCouleur" class="box_3">
+            <h4 class="normal" >DEUTERANOPIE</h4>
+        </div>
+
+        
+
+        <div id="tritanopeCouleur" class="box_4">
+            <h4 class="normal" >TRITANOPIE </h4>
+        </div>
+
+        
+    </div>
+    
+    <script src="create_div.js" ></script>
+    <script src="dalto.js"></script>
+</body>
+
+</html>
