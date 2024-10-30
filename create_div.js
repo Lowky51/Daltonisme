@@ -39,6 +39,7 @@ function createDiv(index, isFirst) {
 
         const newInputText = document.createElement('input');
         newInputText.type = "text"
+        newInputText.id = 'colorTextInput'
         newInputText.style.height = "20px"
         newInputText.style.width = "55px"
         newInputText.style.marginLeft = "-60px"
@@ -46,7 +47,7 @@ function createDiv(index, isFirst) {
         document.getElementById('couleur' + index).appendChild(newInputText);
 
     }
-}
+}   
 
 function createMultipleDivs() {
     for (let i = 0; i < positions.length; i++) {
