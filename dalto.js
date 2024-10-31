@@ -1,9 +1,10 @@
 var colorWell;
 var colorTextInput;
-var defaultColor = "#58D4D1";
-var selectedColor = defaultColor;
+var defaultColor = "#58D4D1"; // Valeur initiale pour la couleur par défaut
 let results = { result1: null, result2: null, result3: null };
 let squareColors = []; // Tableau pour stocker les couleurs des carrés
+let currentIndex = 0;
+let offsetX = 0;
 
 window.addEventListener("load", startup, false);
 function startup() {
@@ -19,38 +20,39 @@ function startup() {
 
     colorWell.select();
 
-    // Initialisation des divs de base (par ex. couleur pour protanope, deuteranope et tritanope)
     initBaseDivs();
+
+    // Ajouter un écouteur d'événements au bouton
+    document.getElementById("createLinesButton").addEventListener("click", createMultipleLines);
 }
 
 function initBaseDivs() {
-    // Initialisation des couleurs de base pour les divs
-    updateColor(result1, "protanopeCouleur", defaultColor);
-    updateColor(result2, "deuteranopeCouleur", defaultColor);
-    updateColor(result3, "tritanopeCouleur", defaultColor);
+    updateColor(results.result1, "protanopeCouleur", defaultColor);
+    updateColor(results.result2, "deuteranopeCouleur", defaultColor);
+    updateColor(results.result3, "tritanopeCouleur", defaultColor);
 }
 
 function updateFirst(event) {
-    selectedColor = event.target.value;
-    colorTextInput.value = selectedColor;
+    defaultColor = event.target.value;
+    colorTextInput.value = defaultColor;
     updateDisplayColor();
 }
 
 function updateFromText(event) {
-    selectedColor = event.target.value;
-    colorWell.value = selectedColor;
+    defaultColor = event.target.value;
+    colorWell.value = defaultColor;
     updateDisplayColor();
 }
 
 function updateAll(event) {
-    selectedColor = event.target.value;
+    defaultColor = event.target.value;
     updateDisplayColor();
 }
 
 function updateDisplayColor() {
     var p = document.getElementById('CouleurOrigine');
     if (p) {
-        p.style.backgroundColor = selectedColor;
+        p.style.backgroundColor = defaultColor;
     }
 }
 
@@ -62,8 +64,7 @@ output.innerHTML = slider.value;
 slider.oninput = function () {
     output.innerHTML = this.value;
     const t = parseFloat(this.value);
-
-    // Matrices pour différents types de daltonisme
+    // Matrices pour la transformation des couleurs
     const prota0 = [[1.0, 0.0, -0.0], [0.0, 1.0, 0.0], [-0.0, -0.0, 1.0]];
     const prota1 = [[0.152286, 1.052583, -0.204868], [0.114503, 0.786281, 0.099216], [-0.003882, -0.048116, 1.051998]];
     const deuta0 = [[1.0, 0.0, -0.0], [0.0, 1.0, 0.0], [-0.0, -0.0, 1.0]];
@@ -71,23 +72,19 @@ slider.oninput = function () {
     const trita0 = [[1.0, 0.0, -0.0], [0.0, 1.0, 0.0], [-0.0, -0.0, 1.0]];
     const trita1 = [[1.255528, -0.076749, -0.178779], [-0.078411, 0.930809, 0.147602], [0.004733, 0.691367, 0.303900]];
 
-    // Interpolation des matrices
-    result1 = interpolateMatrices(prota0, prota1, t);
-    result2 = interpolateMatrices(deuta0, deuta1, t);
-    result3 = interpolateMatrices(trita0, trita1, t);
+    results.result1 = interpolateMatrices(prota0, prota1, t);
+    results.result2 = interpolateMatrices(deuta0, deuta1, t);
+    results.result3 = interpolateMatrices(trita0, trita1, t);
 
-    // Met à jour les couleurs des divs de base
-    updateColor(result1, "protanopeCouleur", defaultColor);
-    updateColor(result2, "deuteranopeCouleur", defaultColor);
-    updateColor(result3, "tritanopeCouleur", defaultColor);
+    updateColor(results.result1, "protanopeCouleur", defaultColor);
+    updateColor(results.result2, "deuteranopeCouleur", defaultColor);
+    updateColor(results.result3, "tritanopeCouleur", defaultColor);
 
-    // Mise à jour des nouvelles divs créées dynamiquement avec la couleur du premier carré
     for (let i = 0; i < squareColors.length; i += 4) {
-        const baseColor = squareColors[i]; // Couleur de la première div de chaque ligne
+        const baseColor = squareColors[i];
         if (baseColor) {
-            for (let j = 1; j <= 3; j++) { // Met à jour les 3 dernières divs
-                const colorResult = j === 1 ? result1 : (j === 2 ? result2 : result3);
-                updateColor(colorResult, "couleur" + (i + j), baseColor);
+            for (let j = 1; j <= 3; j++) {
+                updateColor(j === 1 ? results.result1 : (j === 2 ? results.result2 : results.result3), "couleur" + (i + j), baseColor);
             }
         }
     }
@@ -121,16 +118,18 @@ function updateColor(result, elementId, baseColor) {
     document.getElementById(elementId).style.backgroundColor = hex;
 }
 
+// Fonction pour générer une couleur hexadécimale aléatoire
+function getRandomColor() {
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    return "#" + randomColor.padStart(6, '0'); // Assure que la couleur a toujours 6 chiffres
+}
+
 const positions = [
     { x: 80, y: 20 },
     { x: 210, y: -105 },
     { x: 360, y: -105 },
     { x: 510, y: -105 },
 ];
-
-let currentIndex = 0;
-let offsetX = 0;
-let currentColor = defaultColor;
 
 function createDiv(index, isFirst) {
     const newDiv = document.createElement('div');
@@ -145,8 +144,9 @@ function createDiv(index, isFirst) {
     newDiv.style.marginLeft = `${position.x + offsetX}px`;
     newDiv.style.marginTop = `${position.y}px`;
 
-    newDiv.style.backgroundColor = currentColor;
-    squareColors[index] = currentColor;
+    const randomColor = getRandomColor(); // Obtenez une couleur aléatoire
+    newDiv.style.backgroundColor = randomColor; // Appliquez la couleur aléatoire
+    squareColors[index] = randomColor; // Stockez la couleur dans le tableau
 
     document.getElementById('container').appendChild(newDiv);
     document.getElementById('couleur' + index).appendChild(newP);
@@ -157,9 +157,11 @@ function createDiv(index, isFirst) {
         newInputColor.style.marginLeft = "-60px";
         newInputColor.id = 'colorWell' + index;
 
+        newInputColor.value = randomColor; // Mettez la couleur aléatoire dans l'input
         newInputColor.addEventListener('input', (event) => {
-            newDiv.style.backgroundColor = event.target.value;
-            squareColors[index] = event.target.value;
+            newDiv.style.backgroundColor = event.target.value; // Change la couleur de la div
+            squareColors[index] = event.target.value; // Mettez à jour la couleur dans le tableau
+            syncLineColors(event.target.value, index); // Synchronisez les couleurs de la ligne
         });
 
         document.getElementById('couleur' + index).appendChild(newInputColor);
@@ -171,28 +173,52 @@ function createDiv(index, isFirst) {
         newInputText.style.width = "55px";
         newInputText.style.marginLeft = "-60px";
         newInputText.style.marginTop = "30px";
+        newInputText.value = randomColor; // Mettez la couleur aléatoire dans l'input texte
+        newInputText.addEventListener('input', (event) => {
+            newInputColor.value = event.target.value; // Synchronisez l'input de couleur avec l'input de texte
+            newDiv.style.backgroundColor = event.target.value; // Change la couleur de la div
+            squareColors[index] = event.target.value; // Mettez à jour la couleur dans le tableau
+            syncLineColors(event.target.value, index); // Synchronisez les couleurs de la ligne
+        });
+
         document.getElementById('couleur' + index).appendChild(newInputText);
 
         const newButton = document.createElement('button');
         newButton.textContent = "-";
         newButton.className = 'buttonsuppr';
-        newButton.onclick = () => supprdiv(index);
+        newButton.onclick = () => supprdiv(index); // Passer l'index à supprdiv
         document.getElementById('couleur' + index).appendChild(newButton);
     }
+}
 
-    function supprdiv(index) {
-        const divToRemove = document.getElementById('couleur' + index);
-        if (divToRemove) {
-            divToRemove.remove();
-            squareColors[index] = ''; // Reset color if needed
+function syncLineColors(selectedColor, index) {
+    const lineStartIndex = Math.floor(index / 4) * 4; // Commence à partir de la première div de la ligne
+    for (let i = lineStartIndex; i < lineStartIndex + 4; i++) {
+        if (i < squareColors.length) {
+            squareColors[i] = selectedColor; // Met à jour la couleur dans le tableau
+            updateColor(results.result1, "couleur" + i, selectedColor); // Met à jour les divs existantes
         }
+    }
+}
+
+function createMultipleLines() {
+    for (let i = 0; i < 5; i++) {
+        createMultipleDivs();
     }
 }
 
 function createMultipleDivs() {
     for (let i = 0; i < positions.length; i++) {
-        createDiv(currentIndex, i === 0);
+        createDiv(currentIndex, i === 0); // Passer true uniquement pour la première div
         currentIndex++;
     }
-    offsetX += 0;
+    offsetX += 0; // Si vous voulez espacer les lignes, vous pouvez ajuster cette valeur
+}
+
+function supprdiv(index) {
+    const divToRemove = document.getElementById('couleur' + index);
+    if (divToRemove) {
+        divToRemove.remove();
+        squareColors[index] = '';
+    }
 }
