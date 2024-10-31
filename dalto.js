@@ -18,6 +18,16 @@ function startup() {
     colorTextInput.addEventListener("input", updateFromText, false);
 
     colorWell.select();
+
+    // Initialisation des divs de base (par ex. couleur pour protanope, deuteranope et tritanope)
+    initBaseDivs();
+}
+
+function initBaseDivs() {
+    // Initialisation des couleurs de base pour les divs
+    updateColor(result1, "protanopeCouleur", defaultColor);
+    updateColor(result2, "deuteranopeCouleur", defaultColor);
+    updateColor(result3, "tritanopeCouleur", defaultColor);
 }
 
 function updateFirst(event) {
@@ -51,48 +61,33 @@ output.innerHTML = slider.value;
 
 slider.oninput = function () {
     output.innerHTML = this.value;
-
     const t = parseFloat(this.value);
 
-    const prota0 = [[1.0, 0.0, -0.0],
-                    [0.0, 1.0, 0.0],
-                    [-0.0, -0.0, 1.0]];
+    // Matrices pour différents types de daltonisme
+    const prota0 = [[1.0, 0.0, -0.0], [0.0, 1.0, 0.0], [-0.0, -0.0, 1.0]];
+    const prota1 = [[0.152286, 1.052583, -0.204868], [0.114503, 0.786281, 0.099216], [-0.003882, -0.048116, 1.051998]];
+    const deuta0 = [[1.0, 0.0, -0.0], [0.0, 1.0, 0.0], [-0.0, -0.0, 1.0]];
+    const deuta1 = [[0.367322, 0.860646, -0.227968], [0.280085, 0.786281, 0.099216], [-0.011820, 0.042940, 0.968881]];
+    const trita0 = [[1.0, 0.0, -0.0], [0.0, 1.0, 0.0], [-0.0, -0.0, 1.0]];
+    const trita1 = [[1.255528, -0.076749, -0.178779], [-0.078411, 0.930809, 0.147602], [0.004733, 0.691367, 0.303900]];
 
-    const prota1 = [[0.152286, 1.052583, -0.204868],
-                    [0.114503, 0.786281, 0.099216],
-                    [-0.003882, -0.048116, 1.051998]];
-
-    const deuta0 = [[1.0, 0.0, -0.0],
-                    [0.0, 1.0, 0.0],
-                    [-0.0, -0.0, 1.0]];
-
-    const deuta1 = [[0.367322, 0.860646, -0.227968],
-                    [0.280085, 0.786281, 0.099216],
-                    [-0.011820, 0.042940, 0.968881]];
-
-    const trita0 = [[1.0, 0.0, -0.0],
-                    [0.0, 1.0, 0.0],
-                    [-0.0, -0.0, 1.0]];
-
-    const trita1 = [[1.255528, -0.076749, -0.178779],
-                    [-0.078411, 0.930809, 0.147602],
-                    [0.004733, 0.691367, 0.303900]];
-
+    // Interpolation des matrices
     result1 = interpolateMatrices(prota0, prota1, t);
-    updateColor(result1, "protanopeCouleur");
-
     result2 = interpolateMatrices(deuta0, deuta1, t);
-    updateColor(result2, "deuteranopeCouleur");
-
     result3 = interpolateMatrices(trita0, trita1, t);
-    updateColor(result3, "tritanopeCouleur");
 
-    // Met à jour les trois dernières divs de chaque rangée
+    // Met à jour les couleurs des divs de base
+    updateColor(result1, "protanopeCouleur", defaultColor);
+    updateColor(result2, "deuteranopeCouleur", defaultColor);
+    updateColor(result3, "tritanopeCouleur", defaultColor);
+
+    // Mise à jour des nouvelles divs créées dynamiquement avec la couleur du premier carré
     for (let i = 0; i < squareColors.length; i += 4) {
-        for (let j = 1; j <= 3; j++) { // Met à jour les 3 dernières divs
-            if (i + j < squareColors.length) {
+        const baseColor = squareColors[i]; // Couleur de la première div de chaque ligne
+        if (baseColor) {
+            for (let j = 1; j <= 3; j++) { // Met à jour les 3 dernières divs
                 const colorResult = j === 1 ? result1 : (j === 2 ? result2 : result3);
-                updateColor(colorResult, "couleur" + (i + j));
+                updateColor(colorResult, "couleur" + (i + j), baseColor);
             }
         }
     }
@@ -109,10 +104,10 @@ function interpolateMatrices(A, B, t) {
     return C;
 }
 
-function updateColor(result, elementId) {
-    let r = parseInt(selectedColor.slice(1, 3), 16);
-    let g = parseInt(selectedColor.slice(3, 5), 16);
-    let b = parseInt(selectedColor.slice(5, 7), 16);
+function updateColor(result, elementId, baseColor) {
+    let r = parseInt(baseColor.slice(1, 3), 16);
+    let g = parseInt(baseColor.slice(3, 5), 16);
+    let b = parseInt(baseColor.slice(5, 7), 16);
 
     let newR = result[0][0] * r + result[0][1] * g + result[0][2] * b;
     let newG = result[1][0] * r + result[1][1] * g + result[1][2] * b;
@@ -124,11 +119,7 @@ function updateColor(result, elementId) {
 
     let hex = "#" + ((1 << 24) + (newR << 16) + (newG << 8) + newB).toString(16).slice(1).toUpperCase();
     document.getElementById(elementId).style.backgroundColor = hex;
-
 }
-
-
-
 
 const positions = [
     { x: 80, y: 20 },
@@ -139,8 +130,7 @@ const positions = [
 
 let currentIndex = 0;
 let offsetX = 0;
-let currentColor = '';
-let  = []; // Assurez-vous que ce tableau est défini
+let currentColor = defaultColor;
 
 function createDiv(index, isFirst) {
     const newDiv = document.createElement('div');
@@ -155,8 +145,8 @@ function createDiv(index, isFirst) {
     newDiv.style.marginLeft = `${position.x + offsetX}px`;
     newDiv.style.marginTop = `${position.y}px`;
 
-    newDiv.style.backgroundColor = currentColor; // Utilisez currentColor ici
-    squareColors[index] = currentColor; // Stockez la couleur dans le tableau
+    newDiv.style.backgroundColor = currentColor;
+    squareColors[index] = currentColor;
 
     document.getElementById('container').appendChild(newDiv);
     document.getElementById('couleur' + index).appendChild(newP);
@@ -168,15 +158,15 @@ function createDiv(index, isFirst) {
         newInputColor.id = 'colorWell' + index;
 
         newInputColor.addEventListener('input', (event) => {
-            newDiv.style.backgroundColor = event.target.value; // Change la couleur de la div
-            squareColors[index] = event.target.value; // Mettez à jour la couleur dans le tableau
+            newDiv.style.backgroundColor = event.target.value;
+            squareColors[index] = event.target.value;
         });
 
         document.getElementById('couleur' + index).appendChild(newInputColor);
 
         const newInputText = document.createElement('input');
         newInputText.type = "text";
-        newInputText.id = 'colorTextInput';
+        newInputText.id = 'colorTextInput' + index;
         newInputText.style.height = "20px";
         newInputText.style.width = "55px";
         newInputText.style.marginLeft = "-60px";
@@ -186,24 +176,22 @@ function createDiv(index, isFirst) {
         const newButton = document.createElement('button');
         newButton.textContent = "-";
         newButton.className = 'buttonsuppr';
-        newButton.onclick = () => supprdiv(index); // Passer l'index à supprdiv
+        newButton.onclick = () => supprdiv(index);
         document.getElementById('couleur' + index).appendChild(newButton);
     }
 
     function supprdiv(index) {
-        // Supprime la div correspondante
         const divToRemove = document.getElementById('couleur' + index);
-        divToRemove.className = ''
         if (divToRemove) {
             divToRemove.remove();
-            squareColors[index] = ''; // Réinitialiser la couleur si nécessaire
+            squareColors[index] = ''; // Reset color if needed
         }
     }
 }
 
 function createMultipleDivs() {
     for (let i = 0; i < positions.length; i++) {
-        createDiv(currentIndex, i === 0); // Passer true uniquement pour la première div
+        createDiv(currentIndex, i === 0);
         currentIndex++;
     }
     offsetX += 0;
