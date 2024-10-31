@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Image</title>
+    <style>
+        #drop-area {
+            border: 2px dashed #ccc;
+            border-radius: 20px;
+            width: 200px;
+            height: 200px;
+            margin: auto;
+        }
+        canvas {
+            display: none;
+        }
+        #controls {
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="drop-area">Déposez votre image ici</div>
+<div id="controls">
+    <button onclick="setMatrix(1)">PROTA</button>
+    <button onclick="setMatrix(2)">DEUTA</button>
+    <button onclick="setMatrix(3)">TRITA</button>
+</div>
+<canvas id="canvas"></canvas>
+
+<script src="img_script.js"></script>
+</body>
+</html>
+
