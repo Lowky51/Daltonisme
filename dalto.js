@@ -1,13 +1,16 @@
 var colorWell;
 var colorTextInput;
-var defaultColor = "#58D4D1"; // Valeur initiale pour la couleur par défaut
+var defaultColor = getRandomColor(); // Valeur initiale pour la couleur par défaut
 let results = { result1: null, result2: null, result3: null };
 let squareColors = []; // Tableau pour stocker les couleurs des carrés
 let currentIndex = 0;
 let offsetX = 0;
 
+document.getElementById('CouleurOrigine').style.backgroundColor = defaultColor
+
 window.addEventListener("load", startup, false);
 function startup() {
+    slider.oninput()
     colorWell = document.querySelector("#colorWell");
     colorTextInput = document.querySelector("#colorTextInput");
 
@@ -36,23 +39,20 @@ function updateFirst(event) {
     defaultColor = event.target.value;
     colorTextInput.value = defaultColor;
     updateDisplayColor();
-    slider.value = 0; // Réinitialiser le slider à 0
-    output.innerHTML = 0; // Réinitialiser le contenu de l'élément avec ID 'test' à 0
+    synchronizeLastThreeDivs(); // Synchroniser les trois dernières divs
 }
 
 function updateFromText(event) {
     defaultColor = event.target.value;
     colorWell.value = defaultColor;
     updateDisplayColor();
-    slider.value = 0; // Réinitialiser le slider à 0
-    output.innerHTML = 0; // Réinitialiser le contenu de l'élément avec ID 'test' à 0
+    synchronizeLastThreeDivs(); // Synchroniser les trois dernières divs
 }
 
 function updateAll(event) {
     defaultColor = event.target.value;
     updateDisplayColor();
-    slider.value = 0; // Réinitialiser le slider à 0
-    output.innerHTML = 0; // Réinitialiser le contenu de l'élément avec ID 'test' à 0
+    synchronizeLastThreeDivs(); // Synchroniser les trois dernières divs
 }
 
 function updateDisplayColor() {
@@ -168,8 +168,6 @@ function createDiv(index, isFirst) {
             newDiv.style.backgroundColor = event.target.value; // Change la couleur de la div
             squareColors[index] = event.target.value; // Mettez à jour la couleur dans le tableau
             syncLineColors(event.target.value, index); // Synchronisez les couleurs de la ligne
-            slider.value = 0; // Réinitialiser le slider à 0
-            output.innerHTML = 0; // Réinitialiser le contenu de l'élément avec ID 'test' à 0
         });
 
         document.getElementById('couleur' + index).appendChild(newInputColor);
@@ -187,8 +185,6 @@ function createDiv(index, isFirst) {
             newDiv.style.backgroundColor = event.target.value; // Change la couleur de la div
             squareColors[index] = event.target.value; // Mettez à jour la couleur dans le tableau
             syncLineColors(event.target.value, index); // Synchronisez les couleurs de la ligne
-            slider.value = 0; // Réinitialiser le slider à 0
-            output.innerHTML = 0; // Réinitialiser le contenu de l'élément avec ID 'test' à 0
         });
 
         document.getElementById('couleur' + index).appendChild(newInputText);
@@ -207,6 +203,18 @@ function syncLineColors(selectedColor, index) {
         if (i < squareColors.length) {
             squareColors[i] = selectedColor; // Met à jour la couleur dans le tableau
             updateColor(results.result1, "couleur" + i, selectedColor); // Met à jour les divs existantes
+        }
+    }
+}
+
+function synchronizeLastThreeDivs() {
+    const startIndex = Math.floor(currentIndex / 4) * 4; // Commencer à partir de la première div de la ligne
+    for (let i = 1; i <= 3; i++) {
+        const index = startIndex + i;
+        if (index < squareColors.length) {
+            const color = squareColors[startIndex]; // Obtenez la couleur de la première div de la ligne
+            squareColors[index] = color; // Synchroniser la couleur
+            updateColor(results.result1, "couleur" + index, color); // Met à jour les divs existantes
         }
     }
 }
