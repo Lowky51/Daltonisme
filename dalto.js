@@ -36,17 +36,23 @@ function updateFirst(event) {
     defaultColor = event.target.value;
     colorTextInput.value = defaultColor;
     updateDisplayColor();
+    slider.value = 0; // Réinitialiser le slider à 0
+    output.innerHTML = 0; // Réinitialiser le contenu de l'élément avec ID 'test' à 0
 }
 
 function updateFromText(event) {
     defaultColor = event.target.value;
     colorWell.value = defaultColor;
     updateDisplayColor();
+    slider.value = 0; // Réinitialiser le slider à 0
+    output.innerHTML = 0; // Réinitialiser le contenu de l'élément avec ID 'test' à 0
 }
 
 function updateAll(event) {
     defaultColor = event.target.value;
     updateDisplayColor();
+    slider.value = 0; // Réinitialiser le slider à 0
+    output.innerHTML = 0; // Réinitialiser le contenu de l'élément avec ID 'test' à 0
 }
 
 function updateDisplayColor() {
@@ -162,6 +168,8 @@ function createDiv(index, isFirst) {
             newDiv.style.backgroundColor = event.target.value; // Change la couleur de la div
             squareColors[index] = event.target.value; // Mettez à jour la couleur dans le tableau
             syncLineColors(event.target.value, index); // Synchronisez les couleurs de la ligne
+            slider.value = 0; // Réinitialiser le slider à 0
+            output.innerHTML = 0; // Réinitialiser le contenu de l'élément avec ID 'test' à 0
         });
 
         document.getElementById('couleur' + index).appendChild(newInputColor);
@@ -179,6 +187,8 @@ function createDiv(index, isFirst) {
             newDiv.style.backgroundColor = event.target.value; // Change la couleur de la div
             squareColors[index] = event.target.value; // Mettez à jour la couleur dans le tableau
             syncLineColors(event.target.value, index); // Synchronisez les couleurs de la ligne
+            slider.value = 0; // Réinitialiser le slider à 0
+            output.innerHTML = 0; // Réinitialiser le contenu de l'élément avec ID 'test' à 0
         });
 
         document.getElementById('couleur' + index).appendChild(newInputText);
