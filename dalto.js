@@ -25,7 +25,6 @@ function startup() {
 
     initBaseDivs();
 
-    // Ajouter un écouteur d'événements au bouton
     document.getElementById("createLinesButton").addEventListener("click", createMultipleLines);
 }
 
@@ -39,23 +38,27 @@ function updateFirst(event) {
     defaultColor = event.target.value;
     colorTextInput.value = defaultColor;
     updateDisplayColor();
-    synchronizeLastThreeDivs(); // Synchroniser les trois dernières divs
+    synchronizeLastThreeDivs(); 
+    slider.oninput()
 }
 
 function updateFromText(event) {
     defaultColor = event.target.value;
     colorWell.value = defaultColor;
     updateDisplayColor();
-    synchronizeLastThreeDivs(); // Synchroniser les trois dernières divs
+    synchronizeLastThreeDivs();
+    slider.oninput() 
 }
 
 function updateAll(event) {
     defaultColor = event.target.value;
     updateDisplayColor();
-    synchronizeLastThreeDivs(); // Synchroniser les trois dernières divs
+    synchronizeLastThreeDivs(); 
+    slider.oninput()
 }
 
 function updateDisplayColor() {
+    
     var p = document.getElementById('CouleurOrigine');
     if (p) {
         p.style.backgroundColor = defaultColor;
@@ -70,7 +73,7 @@ output.innerHTML = slider.value;
 slider.oninput = function () {
     output.innerHTML = this.value;
     const t = parseFloat(this.value);
-    // Matrices pour la transformation des couleurs
+
     const prota0 = [[1.0, 0.0, -0.0], 
                     [0.0, 1.0, 0.0], 
                     [-0.0, -0.0, 1.0]];
@@ -102,8 +105,10 @@ slider.oninput = function () {
     updateColor(results.result2, "deuteranopeCouleur", defaultColor);
     updateColor(results.result3, "tritanopeCouleur", defaultColor);
 
+    
+
     for (let i = 0; i < squareColors.length; i += 4) {
-        const baseColor = squareColors[i];
+        const baseColor = squareColors[i];  
         if (baseColor) {
             for (let j = 1; j <= 3; j++) {
                 updateColor(j === 1 ? results.result1 : (j === 2 ? results.result2 : results.result3), "couleur" + (i + j), baseColor);
@@ -136,14 +141,16 @@ function updateColor(result, elementId, baseColor) {
     newG = Math.min(255, Math.max(0, Math.round(newG)));
     newB = Math.min(255, Math.max(0, Math.round(newB)));
 
+
     let hex = "#" + ((1 << 24) + (newR << 16) + (newG << 8) + newB).toString(16).slice(1).toUpperCase();
     document.getElementById(elementId).style.backgroundColor = hex;
+
+    
 }
 
-// Fonction pour générer une couleur hexadécimale aléatoire
 function getRandomColor() {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    return "#" + randomColor.padStart(6, '0'); // Assure que la couleur a toujours 6 chiffres
+    return "#" + randomColor.padStart(6, '0'); 
 }
 
 const positions = [
@@ -166,9 +173,9 @@ function createDiv(index, isFirst) {
     newDiv.style.marginLeft = `${position.x + offsetX}px`;
     newDiv.style.marginTop = `${position.y}px`;
 
-    const randomColor = getRandomColor(); // Obtenez une couleur aléatoire
-    newDiv.style.backgroundColor = randomColor; // Appliquez la couleur aléatoire
-    squareColors[index] = randomColor; // Stockez la couleur dans le tableau
+    const randomColor = getRandomColor(); 
+    newDiv.style.backgroundColor = randomColor; 
+    squareColors[index] = randomColor; 
 
     document.getElementById('container').appendChild(newDiv);
     document.getElementById('couleur' + index).appendChild(newP);
@@ -179,11 +186,13 @@ function createDiv(index, isFirst) {
         newInputColor.style.marginLeft = "-60px";
         newInputColor.id = 'colorWell' + index;
 
-        newInputColor.value = randomColor; // Mettez la couleur aléatoire dans l'input
+        newInputColor.value = randomColor; 
         newInputColor.addEventListener('input', (event) => {
-            newDiv.style.backgroundColor = event.target.value; // Change la couleur de la div
-            squareColors[index] = event.target.value; // Mettez à jour la couleur dans le tableau
-            syncLineColors(event.target.value, index); // Synchronisez les couleurs de la ligne
+            const newColor = event.target.value;
+            newDiv.style.backgroundColor = newColor; 
+            squareColors[index] = newColor;
+            newInputText.value = newColor; // Synchroniser avec le champ texte
+            slider.oninput(); // Mettre à jour les autres divs
         });
 
         document.getElementById('couleur' + index).appendChild(newInputColor);
@@ -195,12 +204,13 @@ function createDiv(index, isFirst) {
         newInputText.style.width = "55px";
         newInputText.style.marginLeft = "-60px";
         newInputText.style.marginTop = "30px";
-        newInputText.value = randomColor; // Mettez la couleur aléatoire dans l'input texte
+        newInputText.value = randomColor; 
         newInputText.addEventListener('input', (event) => {
-            newInputColor.value = event.target.value; // Synchronisez l'input de couleur avec l'input de texte
-            newDiv.style.backgroundColor = event.target.value; // Change la couleur de la div
-            squareColors[index] = event.target.value; // Mettez à jour la couleur dans le tableau
-            syncLineColors(event.target.value, index); // Synchronisez les couleurs de la ligne
+            const newColor = event.target.value;
+            newInputColor.value = newColor; // Synchroniser avec le champ couleur
+            newDiv.style.backgroundColor = newColor; 
+            squareColors[index] = newColor;
+            slider.oninput(); // Mettre à jour les autres divs
         });
 
         document.getElementById('couleur' + index).appendChild(newInputText);
@@ -213,30 +223,29 @@ function createDiv(index, isFirst) {
     }
 }
 
-function syncLineColors(selectedColor, index) {
-    const lineStartIndex = Math.floor(index / 4) * 4; // Commence à partir de la première div de la ligne
-    for (let i = lineStartIndex; i < lineStartIndex + 4; i++) {
-        if (i < squareColors.length) {
-            squareColors[i] = selectedColor; // Met à jour la couleur dans le tableau
-            updateColor(results.result1, "couleur" + i, selectedColor); // Met à jour les divs existantes
-        }
-    }
-}
+
+
 
 function synchronizeLastThreeDivs() {
     const startIndex = Math.floor(currentIndex / 4) * 4; // Commencer à partir de la première div de la ligne
-    for (let i = 1; i <= 3; i++) {
-        const index = startIndex + i;
-        if (index < squareColors.length) {
-            const color = squareColors[startIndex]; // Obtenez la couleur de la première div de la ligne
-            squareColors[index] = color; // Synchroniser la couleur
-            updateColor(results.result1, "couleur" + index, color); // Met à jour les divs existantes
+
+    if (startIndex < squareColors.length) {
+        const color = squareColors[startIndex]; // Obtenez la couleur de la première div de la ligne
+
+        // Synchroniser les couleurs des trois divs suivantes dans la ligne
+        for (let i = 1; i <= 3; i++) {
+            const index = startIndex + i;
+            if (index < squareColors.length) {
+                squareColors[index] = color;
+                document.getElementById('couleur' + index).style.backgroundColor = color;
+            }
         }
     }
 }
 
+
 function createMultipleLines() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) { // Changer à 5 pour créer 5 lignes
         createMultipleDivs();
     }
 }
@@ -246,8 +255,9 @@ function createMultipleDivs() {
         createDiv(currentIndex, i === 0); // Passer true uniquement pour la première div
         currentIndex++;
     }
-    offsetX += 0; // Si vous voulez espacer les lignes, vous pouvez ajuster cette valeur
+    offsetX += 0; // Ajustez cette valeur pour espacer les lignes si nécessaire
 }
+
 
 function supprdiv(index) {
     const divToRemove = document.getElementById('couleur' + index);
