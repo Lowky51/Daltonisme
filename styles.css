@@ -229,7 +229,7 @@ section {
   height: 5vh;
   margin-left: -11vh;
   margin-top: 5vh;
-  font-size: 23px;
+  font-size: 15px;
 }
 
 @media screen and (max-width: 1500px) {
@@ -290,5 +290,51 @@ section {
       margin-top: 4.3vh;
       font-size: 18px;
   }
+  
+}
+
+
+@media screen and (max-width: 500px) {
+  .new-color {
+      width: 4vh;
+      height: 4vh;
+      margin-left: -4.5vh;
+      margin-top: -0.2vh;
+  
+  }
+  
+  
+  .buttonsuppr {
+  
+      width: auto;
+      height: 2.5vh;
+      cursor: pointer;
+      margin-left: -3.4vh;
+      margin-top: 7vh;
+  }
+  
+  .new-text {
+      position: absolute;
+      width: 3.9vh;
+      height: 1.6vh;
+      margin-left: -4.7vh;
+      margin-top: 4.3vh;
+      font-size: 18px;
+  }
+
+  .new-div {
+    border: solid black 3px;
+    width: 20%;
+    height: 10vh;
+    display: flex;
+    margin-left: 5vh;
+  
+  }
+
+  .normal {
+    font-size: 10px;
+    margin-top: -3vh;
+  }
+  
   
 }
