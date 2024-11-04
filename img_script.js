@@ -56,6 +56,9 @@ function handleFile(file) {
     };
 
     reader.readAsDataURL(file);
+
+    
+
 }
 
 function applyColorTransformation(matrix) {
@@ -73,7 +76,6 @@ function applyColorTransformation(matrix) {
     }
 
     context.putImageData(imageData, 0, 0);
-
   
     canvas.style.display = 'block';
 }
@@ -104,5 +106,7 @@ function setMatrix(matrixNumber) {
     selectedMatrix = matrices[matrixNumber];
     alert('Type de daltonisme sélectionné, veuillez insérer votre image.');
 }
+
+console.log(FileReader())
 
 

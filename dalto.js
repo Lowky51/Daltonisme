@@ -1,3 +1,9 @@
+let roue = document.getElementById("#roue");
+function roue_tourne(){
+    roue.classList.add("active");
+}
+
+
 var colorWell;
 var colorTextInput;
 var defaultColor = getRandomColor(); // Valeur initiale pour la couleur par défaut
@@ -154,10 +160,10 @@ function getRandomColor() {
 }
 
 const positions = [
-    { x: 80, y: 20 },
-    { x: 210, y: -105 },
-    { x: 360, y: -105 },
-    { x: 510, y: -105 },
+    { x: 0.3, y: 1 },
+    { x: 25.3, y: -10.60 },
+    { x: 50.3, y: -10.60 },
+    { x: 75.3, y: -10.60 },
 ];
 
 function createDiv(index, isFirst) {
@@ -170,8 +176,8 @@ function createDiv(index, isFirst) {
     newP.className = "new-p";
 
     const position = positions[index % positions.length];
-    newDiv.style.marginLeft = `${position.x + offsetX}px`;
-    newDiv.style.marginTop = `${position.y}px`;
+    newDiv.style.marginLeft = `${position.x}%`;
+    newDiv.style.marginTop = `${position.y}vh`;
 
     const randomColor = getRandomColor(); 
     newDiv.style.backgroundColor = randomColor; 
@@ -183,8 +189,9 @@ function createDiv(index, isFirst) {
     if (isFirst) {
         const newInputColor = document.createElement('input');
         newInputColor.type = "color";
-        newInputColor.style.marginLeft = "-60px";
+        // newInputColor.style.marginLeft = "-60px";
         newInputColor.id = 'colorWell' + index;
+        newInputColor.className = 'new-color';
 
         newInputColor.value = randomColor; 
         newInputColor.addEventListener('input', (event) => {
@@ -200,10 +207,11 @@ function createDiv(index, isFirst) {
         const newInputText = document.createElement('input');
         newInputText.type = "text";
         newInputText.id = 'colorTextInput' + index;
-        newInputText.style.height = "20px";
-        newInputText.style.width = "55px";
-        newInputText.style.marginLeft = "-60px";
-        newInputText.style.marginTop = "30px";
+        newInputText.className = 'new-text'
+        // newInputText.style.height = "20px";
+        // newInputText.style.width = "55px";
+        // newInputText.style.marginLeft = "-60px";
+        // newInputText.style.marginTop = "30px";
         newInputText.value = randomColor; 
         newInputText.addEventListener('input', (event) => {
             const newColor = event.target.value;
@@ -215,8 +223,8 @@ function createDiv(index, isFirst) {
 
         document.getElementById('couleur' + index).appendChild(newInputText);
 
-        const newButton = document.createElement('button');
-        newButton.textContent = "-";
+        const newButton = document.createElement('img');
+        newButton.src = './images/supprimer.png'
         newButton.className = 'buttonsuppr';
         newButton.onclick = () => supprdiv(index); // Passer l'index à supprdiv
         document.getElementById('couleur' + index).appendChild(newButton);

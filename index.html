@@ -1,72 +1,116 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Changeur de Couleur</title>
-    <style>
-        #texte {
-            font-size: 24px;
-            margin-top: 20px;
-        }
-    </style>
+    <!-- Favicon -->
+        <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <!-- Google Fonts : Belanosima -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Belanosima:wght@400;600;700&display=swap"
+            rel="stylesheet">
+    <!-- Lien CSS -->
+        <link rel="stylesheet" href="styles.css">
+    <!-- Titre de la page -->
+        <title>Document</title>
 </head>
-
 <body>
 
-    <br><br><br>
-    <button style="height: 50px; width: 150px;  border: solid 3px black;" ><a href="img-changer.html">lien vers la page pour les image en mode dalto</a></button>
+<!-- En-tête -->
+<header class="d-flex flex-center box-shadow">
+    <nav class="container">
+        <!-- Logo -->
+        <img class="logo" src="images/logo.png" alt="">
+    </nav>
+</header>
 
-    <p>Palette 1</p>
-    <input class="test" type="color" value="#ff0000" id="colorWell" />
-    <input type="text" name="" id="colorTextInput">
+<!-- Toutes les sections -->
+<section>
+
+    <!-- Section 1 :  -->
+    <section class="container d-grid grid-t-columns gap">
     
+        <!-- Zone gauche -->
+        <div>
 
-    <br><br><br><br>
+            <h1>Question ?</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur delectus nam quasi molestiae voluptatibus voluptates ut ipsam, libero dolores perspiciatis obcaecati eveniet minus doloribus vitae necessitatibus, excepturi quia. Voluptas, nam!</p>
 
-    <div class="slidecontainer">
-        <div id="test"></div>
-        <input type="range" min="0" max="2" value="1" step="0.01" class="slider" id="myRange">
-        
-    </div>
+        </div><!-- Zone gauche -->
 
-    <button class="button_create" onclick="createMultipleDivs()" >Créer une palette de couleur</button>
-    <br><br><br>
-    <button onclick="createMultipleLines()" id="*">Créer une palette de 5 couleur</button>
-    <br><br><br><br><br>
+        <!-- Zone droite -->
+        <div>
 
+            <div>
+                
+                <!-- Code HEX & Selecteur de couleur -->
+                <div>
+                    <input class="test" type="color" value="#ff0000" id="colorWell" />
+                    <input type="text" name="" id="couleurInput">
+                </div>
+            
+                <!-- Bouton "Créer une palette de couleur" -->
+                <button class="button_create" onclick="createMultipleDivs()">Créer une palette de couleur</button>
+
+                <!-- Selecteur taux de sévérité -->
+                <div class="slidecontainer">
+                    <div id="test">
+                        <p>Taux de sévérité : ...</p>
+                    </div>
+                    <input type="range" min="0" max="2" value="1" step="0.01" class="slider" id="myRange">
+                </div>
+
+                <!-- Icon Info -->
+                <img src="" alt=""><!-- ajouter icon info + lien vers texte en bas de page -->
+
+            </div>
+            
+            <!-- Roue aléatoire -->
+            <a onclick="createMultipleLines()"><img class="size roue_aleatoire" src="images/roue_des_couleurs.jpg" alt=""></a>
+
+        </div><!-- Zone droite -->
     
-    <div id="container" class="" >
+    </section><!-- Section 1 : -->
+    
+    <!-- Section 2 : Les Palettes de couleurs &-->
 
-        <div id="CouleurOrigine" class="box_1">
+    <div id="container" class="section_test" >
+        <div class="flex" >
+        <div id="CouleurOrigine" class="box">
             <h4 class="normal">NORMAL 1 </h4>
         </div>
 
         
 
-        <div id="protanopeCouleur" class="box_2">
+        <div id="protanopeCouleur" class="box">
             <h4 class="normal" >PROTANOPIE </h4>
         </div>
 
         
 
-        <div id="deuteranopeCouleur" class="box_3">
+        <div id="deuteranopeCouleur" class="box">
             <h4 class="normal" >DEUTERANOPIE</h4>
         </div>
 
         
 
-        <div id="tritanopeCouleur" class="box_4">
+        <div id="tritanopeCouleur" class="box">
             <h4 class="normal" >TRITANOPIE </h4>
         </div>
 
-        
+        </div>
     </div>
-    
-    <script src="create_div.js" ></script>
-    <script src="dalto.js"></script>
-</body>
 
+    </section><!-- Section 2 : Les Palettes de couleurs -->
+
+</section><!-- Toutes les sections -->
+
+<!-- Pied de page -->
+<footer class="d-flex flex-center box-shadow"></footer>
+
+<script src="dalto.js"></script>
+
+</body>
 </html>
