@@ -338,3 +338,45 @@ section {
   
   
 }
+
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loader-container div img {
+  left: 49%;
+  top : 45%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.progress-bar {
+  width: 80%;
+  max-width: 400px;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
+
+.progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+  animation: fill 2s forwards;
+}
+
+@keyframes fill {
+  0% {
+      width: 0;
+  }
+  100% {
+      width: 100%;
+  }
+}
