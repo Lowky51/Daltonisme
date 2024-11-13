@@ -1,0 +1,160 @@
+/* .new-div {
+    border: solid black 1px;
+    height: 10vh;
+    display: flex;
+} */
+
+/* .test-new {
+    border: solid black 3px;
+    width: 100px;
+    height: 100px;
+} */
+
+
+/* .buttonsuppr {
+    width: 30px;
+    height: 25px;
+    margin-top: 60px;
+    margin-left: -30px;
+    cursor: pointer;
+} */
+
+/* .button_create {
+  margin-top: 15px;
+  height: 35px;
+  border: solid red 3px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  font-size: large
+}
+
+
+
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Belanosima";
+}
+
+.container {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.gap {
+    gap: 3%;
+}
+
+.size {
+    width: 25%;
+}
+
+/* Flex */
+
+.d-flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Grid */
+.d-grid {
+    display: grid;
+}
+
+.grid-t-columns {
+    grid-template-columns: 50% 50%;
+}
+
+.grid-t-rows {
+    grid-template-columns: 50% 50%;
+}
+
+
+/* HEADER */
+header {
+    background-color: #F9F9F9;
+    height: 10vh;
+    margin-bottom: 10vh;
+}
+
+.box-shadow {
+    box-shadow: 0 0 20px 0;
+}
+
+.logo {
+    width: 30vh;
+}
+
+/* Toutes les sections */
+section {
+    margin-bottom: 0vh;
+}
+
+/* SECTION 1 / / animation roue qui tourne (voir keyframes spin) */
+.roue_aleatoire:active {
+    animation: spin .15s linear;
+}
+
+
+/* SECTION 2 / / Intitulé */
+.texte-miniscules {
+    text-transform: capitalize;
+}
+
+/* Affichage Couleur */
+.box-couleur {
+    height: 100%;
+    margin-top: 5%;
+    border: solid black 1px;
+}
+
+/* FOOTER */
+footer {
+    background-color: #F9F9F9;
+    height: 10vh;
+}
+
+.box-shadow {
+    box-shadow: 0 0 20px 0;
+}
+
+
+/* Se trouve dans "Section 1 (animation qui tourne)" */
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+
+.new-div {
+    border: solid black 3px;
+    width: 25%;
+    height: 5vh;
+    display: flex;
+}

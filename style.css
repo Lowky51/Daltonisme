@@ -1,0 +1,309 @@
+/* Toute la page */
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Belanosima";
+    background-color: #F9F9F9;
+}
+
+header, section {
+    margin-bottom: 10vh;
+}
+
+.container {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.center{
+    text-align: center;
+}
+
+/* Margin */
+
+    .margin-text{
+        margin: 0% 0% 3% 0%;
+    }
+    .margin-text2{
+        margin-bottom: 10%;
+    }
+
+    .margin-top{
+        margin-top: 7%;
+    }
+    
+    .margin-left{
+        margin-left: 40%;
+    }
+
+    .margin-bottom{
+        margin-bottom: 20%;
+    }
+
+/* Width % */
+
+    .width-100{
+        width: 100%;
+    }
+    .width-50 {
+        width: 50%;
+    }
+    .width-35 {
+        width: 35%;
+    }
+
+/* Gap */
+
+    .gap-horizontal {
+        gap: 25%;
+    }
+    .gap-vertical {
+        gap: 10vh;
+    }
+
+/* Flex */
+
+    .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .flex-end {
+        display: flex;
+        justify-content: end;
+        align-items: end;
+    }
+
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .space-beetween{
+        display: flex;
+        justify-self: space-between;
+    }
+
+/* Grid */
+
+    .grid-t-columns1 {
+        display: grid;
+        grid-template-columns: 40% 35%;
+    }
+    .grid-t-columns2 {
+        display: grid;
+        grid-template-columns: 33.33% 33.33% 33.33%;
+    }
+    .grid-t-columns3 {
+        display: grid;
+        grid-template-columns: 90% 10%;
+    }
+    .grid-t-columns4 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-test{
+        grid-column-start: 2;
+        grid-column-end: 2;
+    }
+    
+/* HEADER */
+    
+    header {
+        background-color: #F9F9F9;
+        height: 10vh;
+    }
+    
+    .box-shadow {
+        box-shadow: 0 0 20px 0;
+    }
+    
+    .logo-header {
+        width: 30vh;
+    }
+    
+
+/* SECTION 1 */
+    
+    .group{
+    background-color: white;
+    border-radius: 50px;
+    border: solid #D6D1D1 1px;
+    height: 10%;
+    }
+
+/* Selecteur de couleur */
+
+    #colorWell{
+        border: none;
+        background-color: transparent;
+        width: 100%;
+        height: 90%;
+    }
+    #colorWell::-webkit-color-swatch {
+        -webkit-appearance: none;
+        appearance: none;
+        color: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+/* Code HEX */
+
+    input[type=text] {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        text-align: center;
+    }
+    input::placeholder {
+        color: black;
+    }
+
+/* Bouton "Créer palette couleur" */
+
+    button{
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+/* Bouton "Intégrer image" */
+
+    .btn_img{
+        background-color: white;
+        border-radius: 50px;
+        border: solid #D6D1D1 1px;
+        height: 10%;
+        width: 45%;
+        cursor: pointer;
+    }
+    .telecharg-size{
+        width: 10%;
+        margin-right: 7px;
+    }
+
+/* Selecteur taux de sévérité */
+    input[type="range"]{
+        -webkit-appearance: none;
+        appearance: none;
+        border: solid black 1px;
+        border-radius: 50px;
+        height: 3px;
+        width: 80%;
+        cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb{
+        -webkit-appearance : none;
+        border-radius: 100%;
+        border: solid black 3px;
+        height : 20px;
+        width : 20px;
+        background-color: rgb(0, 0, 0);
+    }
+
+/* animation roue qui tourne (Se trouve dans @keyframes spin) */
+    .roue_aleatoire:active {
+        animation: spin .15s;
+    }
+    .size {
+        width: 100%;
+        cursor: pointer;
+    }
+
+/* SECTION 2 : Intitulé Vision & Affichage Couleur */
+
+    .texte-miniscules {
+        text-transform: capitalize;
+    }
+    
+    .new-div {
+        width: 24.%;
+        height: 10vh;
+        display: flex;
+        border: solid #D6D1D1 1px;
+    }
+
+    .box-shadow-color {
+        box-shadow: 0 0 10px 0;
+        border-radius: 5px;
+    }
+
+    .box {
+        width: 25%;
+        height: 10vh;
+        border: solid #D6D1D1 1px;
+    }
+    .flex {
+        display: flex;
+    }
+
+    .normal {
+        text-align: center;
+        background-color: #ECEAEA;
+    }
+
+    .buttonsuppr {
+        width: auto;
+        cursor: pointer;
+        height: 2.5vh;
+        margin-left: -5vh;
+        margin-top: 7vh;
+    }
+
+    .buttonadd {
+        width: auto;
+        cursor: pointer;
+        height: 2.5vh;
+        margin-left: 0vh;
+        margin-top: 7vh;
+    }
+
+/* SECTION 3 */
+
+    .ligne {
+        width: 4%;
+        height: 2px;
+        background-color: black;
+    }
+
+    .icon-size{
+        width: 2%;
+        margin: 2%;
+    }
+
+    .gap-text {
+        gap: 30%;
+    }
+
+/* FOOTER */
+
+    footer {
+        background-color: #F9F9F9;
+        height: 10vh;
+    }
+
+    .logo-footer {
+        width: 15vh;
+    }
+
+    .box-shadow {
+        box-shadow: 0 0 20px 0;
+    }
+
+
+/* Se trouve dans "Section 1 (animation qui tourne)" */
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
