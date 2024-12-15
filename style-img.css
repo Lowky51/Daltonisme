@@ -1,0 +1,51 @@
+
+
+#drop-area {
+    margin: auto;
+    width: 80%; 
+    max-width: 400px; 
+    height: auto; 
+    border: 2px dashed #ccc;
+    text-align: center;
+    padding: 20px; 
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.origine {
+    text-align: center;
+}
+
+.origine canvas {
+    margin: auto;
+    margin-top: 2vh;
+    max-width: 100%; 
+}
+
+.img-modif {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap; 
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 30%; 
+    margin: 10px;
+}
+
+@media (max-width: 768px) {
+    .img-modif {
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    .item {
+        flex: 1 1 100%; 
+        margin: 10px 0; 
+    }
+}

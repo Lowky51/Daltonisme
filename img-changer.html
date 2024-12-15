@@ -1,46 +1,69 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drag and Drop Image</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-img.css">
+    <!-- Google Fonts : Belanosima -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Belanosima:wght@400;600;700&display=swap"
+        rel="stylesheet">
+<!-- Lien CSS -->
+    <title>Color Transformation</title>
     <style>
-        #drop-area {
-            border: 2px dashed #ccc;
-            border-radius: 20px;
-            width: 400px;
-            height: 200px;
-            margin: auto;
-            
-        }
         canvas {
-            display: none;
-        }
-        #controls {
-            text-align: center;
-            margin: 20px;
-        }
-        #file-input {
-            position: absolute;
-            width: 20%;
-            height: 20px;
-            cursor: pointer;
+            display: block;
+            margin-bottom: 20px;
         }
     </style>
 </head>
-<body>
-<!-- bonjour -->
-<div id="drop-area">
-    Déposez votre image ici ou cliquez pour <strong>télécharger une image</strong>
-    <input type="file" id="file-input" accept="image/*" />
-</div>
-<div id="controls">
-    <button onclick="setMatrix(1)">PROTA</button>
-    <button onclick="setMatrix(2)">DEUTRA</button>
-    <button onclick="setMatrix(3)">TRITA</button>
-</div>
-<canvas id="canvas"></canvas>
 
-<script src="img_script.js"></script>
+<body>
+
+    <!-- En-tête -->
+    <header class="flex-center box-shadow">
+        <nav class="container center">
+            <!-- Logo -->
+            <a href="index.html"><img class="logo-header" src="images/logo.png" alt=""></a>
+            <!-- Icone -->
+            <a href="#infos"><img src="images/info.png" class="icon-size" alt=""></a>
+        </nav>
+    </header>
+
+
+
+    <div id="drop-area">Glissez une image ou cliquez pour en séléctioner une !</div>
+    <input type="file" id="file-input" style="display:none;">
+    <div class="origine">
+        <h2>Image d'origine</h2>
+        <canvas id="canvas-original"></canvas>
+    </div>
+
+    <div class="img-modif">
+        <div class="item">
+            <h2>Protanomalie</h2>
+            <canvas id="canvas1"></canvas>
+        </div>
+        <div class="item">
+            <h2>Deutéranomalie</h2>
+            <canvas id="canvas2"></canvas>
+        </div>
+        <div class="item">
+            <h2>Tritanomalie</h2>
+            <canvas id="canvas3"></canvas>
+        </div>
+    </div>
+
+  
+
+
+
+
+    <script src="img_script.js"></script>
 </body>
+
 </html>
