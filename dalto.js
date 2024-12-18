@@ -16,7 +16,7 @@ function startup() {
 
     colorWell.value = defaultColor;
     colorTextInput.value = defaultColor;
-
+    console.log(colorWell)
     colorWell.addEventListener("input", updateFirst, false);
     colorWell.addEventListener("change", updateAll, false);
     colorTextInput.addEventListener("input", updateFromText, false);
@@ -27,6 +27,7 @@ function startup() {
 
     document.getElementById("createLinesButton").addEventListener("click", createMultipleLines);
 }
+
 
 function initBaseDivs() {
     updateColor(results.result1, "protanopeCouleur", defaultColor);

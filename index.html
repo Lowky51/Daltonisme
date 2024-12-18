@@ -1,175 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-        <link rel="shortcut icon" href="images/logo-a_modifier.png" type="image/x-icon">
-    <!-- Google Fonts : Belanosima -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Belanosima:wght@400;600;700&display=swap"
-            rel="stylesheet">
-    <!-- Lien CSS -->
-        <link rel="stylesheet" href="style.css">
-    <!-- Titre de la page -->
-        <title>Site de daltonisme</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
 </head>
 <body>
-
-<!-- En-tête -->
-<header class="flex-center box-shadow">
-    <nav class="container center">
-        <!-- Logo -->
-        <img class="logo-header" src="images/logo.png" alt="">
-        <!-- Icone -->
-        <a href="#infos"><img src="images/info.png" class="icon-size" alt=""></a>
-    </nav>
-</header>
-
-<!-- Toutes les sections -->
-<section>
-
-    <!-- Section 1 :  -->
-    <section class="container grid-t-columns1 gap-horizontal">
-    
-        <!-- Zone gauche -->
-        <div>
-
-            <!-- Titre -->
-            <h1>Que voit votre voisin ?</h1>
-            <!-- Description -->
-            <p>Entrez une ou plusieurs couleurs pour voir comment elles apparaissent pour les différentes formes de daltonisme. 
-            Découvrez les défis rencontrés de la perception visuelle!</p>
-
-        </div><!-- Zone gauche -->
-
-        <!-- Zone droite -->
-        <div class="width-100">
-
-            <div class="group flex-center grid-t-columns2">
-                <!-- Selecteur de couleur -->
-                <input type="color" value="#ffffff" id="colorWell"/>
-
-                <!-- Code HEX -->
-                <input type="text" id="couleurInput" placeholder="#Couleur"/>
-            
-                <!-- Bouton "Créer une palette de couleur" -->
-                <button class="button_create" onclick="createMultipleDivs()">Créer une palette</button>
-            </div>
-
-            <div class="flex-row grid-t-columns3 margin-top">
-                <!-- Selecteur taux de sévérité -->
-                <div class="slidecontainer">
-                    <div id="test">Sévertié</div>
-                    <input type="range" min="0" max="2" value="0" step="0.01" class="slider" id="myRange">
-                </div>
-
-                <!-- Icon Info -->
-                <a href="#infos"><img class="width-100 flex-center" src="images/info.png" alt=""></a><!-- ajouter icon info + lien vers texte en bas de page -->
-            </div>
-            
-            
-            <!-- Bouton "Intégrer image" -->
-            <div class="btn_img flex-center margin-top">
-                <a style="color: black; text-decoration: none;" href="img-changer.html">Modifier une image !</a>
-            </div>
-
-            <!-- Roue aléatoire -->
-            <div class="margin-bottom margin-top margin-left">
-                <a onclick="createMultipleLines()"><img class="size roue_aleatoire" src="images/roue.png" alt=""></a>
-            </div>
-            
-        </div><!-- Zone droite -->
-
-    </section><!-- Section 1 : --><!-- container -->
-    
-    <!-- Section 2 :  Intitulé Vision & Affichage Couleur -->
-    <section id="container" class="container box-shadow-color margin-top">
-        
-            <div class="flex">
-
-                <!-- Couleur Normal -->
-                <div id="CouleurOrigine" class="box">
-                    <h4 class="normal">Trichromate</h4>
-                </div>
-        
-                <!-- Couleur DEUTERANOPIE -->
-                <div id="deuteranopeCouleur" class="box">
-                    <h4 class="normal" >Deutéranomalie</h4>
-                </div>
-
-                <!-- Couleur TRITANOPIE -->
-                <div id="tritanopeCouleur" class="box">
-                    <h4 class="normal" >Tritanomalie</h4>
-                </div>
-
-                <!-- Couleur PROTANOPIE -->
-                <div id="protanopeCouleur" class="box">
-                    <h4 class="normal" >Protanomalie</h4>
-                </div>
-    
-            </div>
-
-    </section><!-- Section 2 :  Intitulé Vision & Affichage Couleur --><!-- container -->
-
-    <div class="ligne"></div>
-
-    <!-- Icon Info -->
-    <img id="infos" class="icon-size" src="images/info.png" alt=""><!-- ajouter icon info + lien vers texte en bas de page -->
-
-    <!-- Section 3 :  -->
-    <section class="container">
-
-
-        <!-- Utilité du site web -->
-        <div class="center">
-            <h3 class="margin-text">En quoi consiste le site?</h3>
-            <p class="margin-text2">ViewMyColors permet d'explorer comment différentes couleurs sont perçues par des personnes atteintes de divers types de daltonisme. En entrant une ou plusieurs couleurs, tu peux visualiser ces teintes sous différents filtres qui simulent la perception visuelle de personnes ayant des formes courantes de daltonisme, comme le daltonisme rouge-vert ou le daltonisme bleu-jaune. L'interface intuitive, te permet de choisir des couleurs à partir d'une palette ou d'entrer des codes hexadécimaux. Une fois les couleurs sélectionnées, le site génère des représentations visuelles montrant comment ces couleurs apparaissent pour différentes conditions de vision. Cela met en lumière les défis que rencontrent les personnes daltoniennes, notamment dans des situations quotidiennes comme le choix des vêtements, la lecture des graphiques ou l'interprétation des feux de circulation.</p>
-        </div><!-- Utilité du site web -->
-
-        <!-- Explication de chaques anomalies -->
-        <div class="flex-row gap-text margin-text">
-
-            <div class="width-35">
-                <h3>Deutéranomalie</h3>
-                <p>La deutéranomalie est, comme la deutéranopie, un dysfonctionnement des  cônes « verts ». Cependant, ce dysfonctionnement n’est pas total mais  partiel. On appelle les daltoniens de ce genre des trichromates  anormaux. La deutéranomalie touche 1 homme sur 20 et 1 femme sur 300, ce qui en fait le daltonisme le plus courant. Elle se traduit par une  mauvaise appréciation des verts (plus ou moins forte selon les  individus).</p>
-            </div>
-    
-            <div class="width-35">
-                <h3>Tritanomalie</h3>
-                <p>Voyons maintenant la troisième et dernière famille de trichromaties  anormales. La tritanomalie affecte également les cônes « bleus » en  partie. Encore une fois, comme cette affection est partielle, elle varie d’un tritanomal à l’autre !</p>
-            </div>
-    
+    <div class="loader-container">
+        <div><img src="./images/logo_sans_fond.png" alt=""></div>
+        <div class="progress-bar" id="progress" >
+            <div class="progress"></div>
         </div>
+    </div>
 
-        <div class="flex-row gap-text margin-text">
-            
-            <div class="width-35">
-                <h3>Protanomalie</h3>
-                <p>La protanomalie est également une forme de trichromatie anormale. Cette  fois-ci elle touche les cônes « rouges ». Avec 1 homme sur 100 et 1  femme sur 3 000, c’est le troisième daltonisme le plus courant. On a  cette fois le rouge qui est plus ou moins visible dans les mélanges. Il  est notamment beaucoup plus terne que chez les personnes à vision  normale.</p>
-            </div>
-    
-            <div class="width-35 margin-text2">
-                <h3>Trichromate</h3>
-                <p>Se dit d’un œil normal, qui perçoit les trois couleurs fondamentales (rouge, bleu, vert) et leurs nuances.</p>
-            </div>
-            
-        </div>
-        <!-- Explication de chaques anomalies -->
-
-    </section><!-- Section 3 :  --><!-- container -->
-
-</section><!-- Toutes les sections -->
-
-<!-- Pied de page -->
-<footer class="d-flex flex-center box-shadow">
-    <img class="logo-footer" src="images/logo.png" alt="">
-</footer>
-
-<script src="script.js"></script>
-<script src="dalto.js"></script>
-
+    <script src="create_div.js" ></script>
 </body>
 </html>
